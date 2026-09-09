@@ -95,6 +95,22 @@ a:hover { color: var(--accent); }
   margin-bottom: 0.6rem;
 }
 
+.band__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.band__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+}
+
 .band__title {
   color: #fff;
   font-size: clamp(1.4rem, 4vw, 2.1rem);
@@ -104,9 +120,19 @@ a:hover { color: var(--accent); }
 
 .band__subtitle {
   color: #c7cde0;
-  max-width: 52ch;
+  max-width: 58ch;
   margin: 0;
   font-size: 1rem;
+  line-height: 1.6;
+}
+
+.band__link {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.band__link:hover {
+  color: var(--gold);
 }
 
 .band__course {
@@ -351,10 +377,50 @@ a:hover { color: var(--accent); }
 /* Footer --------------------------------------------------------------------------- */
 
 .site-footer {
-  text-align: center;
-  color: var(--ink-soft);
+  background: var(--ink);
+  border-top: 3px solid var(--gold);
+  color: #c7cde0;
   font-size: 0.88rem;
-  padding: 1.5rem 1.25rem 2.5rem;
+  padding: 2rem 1.25rem 2.5rem;
+}
+
+.site-footer__inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer a {
+  color: #e8ecf5;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.site-footer a:hover {
+  color: var(--gold);
+}
+
+.site-footer__credit {
+  font-size: 0.82rem;
+  color: #8a93b0;
+  margin: 0;
+}
+
+.site-footer__credit a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+.site-footer__credit a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* Projects page toolbar ---------------------------------------------------- */
@@ -506,7 +572,14 @@ a:hover { color: var(--accent); }
 
   .site-footer {
     font-size: 0.82rem;
-    padding: 1.25rem 1rem 2rem;
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
   }
 }
 

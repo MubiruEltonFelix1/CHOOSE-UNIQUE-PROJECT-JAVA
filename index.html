@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Course Project Registration</title>
-<meta name="description" content="Register your course project and see what your classmates have already chosen." />
+<title>BSE2101 — OOP 2 Project Registration</title>
+<meta name="description" content="Register your OOP 2 course project. Check taken projects first — every title can only be chosen once." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CiAgPCEtLSBCYWNrZ3JvdW5kIHJvdW5kZWQgc3F1YXJlIC0tPgogIDxyZWN0IHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgcng9IjciIGZpbGw9IiMxYzI1NDEiLz4KCiAgPCEtLSBDbGlwYm9hcmQgYm9keSAtLT4KICA8cmVjdCB4PSI4IiB5PSIxMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE3IiByeD0iMiIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4xMiIvPgogIDxyZWN0IHg9IjgiIHk9IjEwIiB3aWR0aD0iMTYiIGhlaWdodD0iMTciIHJ4PSIyIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMS41Ii8+CgogIDwhLS0gQ2xpcGJvYXJkIHRvcCBjbGlwIC0tPgogIDxyZWN0IHg9IjEyIiB5PSI4IiB3aWR0aD0iOCIgaGVpZ2h0PSI0IiByeD0iMS41IiBmaWxsPSIjMWMyNTQxIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMS41Ii8+CgogIDwhLS0gR29sZCBhY2NlbnQgbGluZSAodG9wIHJ1bGVkIGxpbmUpIC0tPgogIDxsaW5lIHgxPSIxMSIgeTE9IjE2IiB4Mj0iMjEiIHkyPSIxNiIgc3Ryb2tlPSIjYTk4MzRmIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CgogIDwhLS0gQ2hlY2ttYXJrIChncmVlbikgLS0+CiAgPHBvbHlsaW5lIHBvaW50cz0iMTEsMjEgMTQsMjQgMjEsMTgiIHN0cm9rZT0iIzNhNWE0MCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,13 +16,19 @@
   <header class="band">
     <div class="band__inner">
       <div class="band__top">
-        <h1 class="band__title">Course Project Registration</h1>
+        <div class="band__titles">
+          <p class="band__eyebrow">BSE2101 — Object Oriented Programming 2</p>
+          <h1 class="band__title">Course Project Registration</h1>
+        </div>
         <a href="projects.html" class="btn-taken">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
           Check taken projects
         </a>
       </div>
-      <p class="band__subtitle">Check the list below before you submit — every project can only be taken once. Choose something no one else has registered yet.</p>
+      <p class="band__subtitle">
+        Before registering, <a href="projects.html" class="band__link">check the taken projects list</a> to make sure your idea hasn't been claimed yet.
+        If it's not taken, go ahead and register below — every project title can only be chosen once.
+      </p>
     </div>
   </header>
 
@@ -84,7 +91,10 @@
   </main>
 
   <footer class="site-footer">
-    <p>Are you the class president? <a href="admin.html">Go to admin dashboard</a></p>
+    <div class="site-footer__inner">
+      <p>Are you the class president? <a href="admin.html">Go to admin dashboard</a></p>
+      <p class="site-footer__credit">Designed &amp; built by &copy; <a href="https://mubirueltonfelix.com" target="_blank" rel="noopener noreferrer">Mubiru Elton Felix</a></p>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
