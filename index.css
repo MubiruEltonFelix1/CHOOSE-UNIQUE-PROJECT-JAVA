@@ -429,14 +429,14 @@ a:hover { color: var(--accent); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .projects-count {
   color: var(--ink-soft);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   white-space: nowrap;
   margin: 0;
 }
@@ -503,7 +503,7 @@ a:hover { color: var(--accent); }
 /* Tablets and below (≤ 640px) */
 @media (max-width: 640px) {
   .band__inner {
-    padding: 1.75rem 1rem 1.5rem;
+    padding: 1.25rem 1rem 1.1rem;
   }
 
   .band__top {
@@ -521,7 +521,7 @@ a:hover { color: var(--accent); }
   }
 
   .page {
-    padding: 1.25rem 1rem 2.5rem;
+    padding: 1rem 1rem 2rem;
   }
 
   .btn--primary {
@@ -537,10 +537,17 @@ a:hover { color: var(--accent); }
   .projects-toolbar {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
   }
 
   .projects-count {
     text-align: right;
+    font-size: 0.82rem;
+  }
+
+  .search--large {
+    flex: 1 1 auto;
   }
 
   .ledger__meta {
