@@ -1,2 +1,7 @@
-# Environment / secrets — never commit the real config
-config.js
+# config.js contains Supabase public keys — safe to commit for static deployments.
+# If you ever add real secrets here, move them server-side and re-ignore this file.
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
