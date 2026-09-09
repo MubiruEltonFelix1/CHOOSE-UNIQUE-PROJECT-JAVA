@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Taken Projects — Course Project Registration</title>
+<meta name="description" content="Browse and search all projects that have already been registered for this course unit." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <header class="band">
+    <div class="band__inner">
+      <div class="band__top">
+        <h1 class="band__title">Taken Projects</h1>
+        <a href="index.html" class="btn-taken">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to registration
+        </a>
+      </div>
+      <p class="band__subtitle">All projects already registered for <strong class="band__course" id="course-name"></strong>. If you see your idea here, pick something else.</p>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <div class="projects-toolbar">
+      <div class="search search--large">
+        <label for="projects-search" class="sr-only">Search taken projects</label>
+        <svg class="search__icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="projects-search" placeholder="Search by project title or student name…" autocomplete="off" />
+      </div>
+      <p class="projects-count" id="projects-count" aria-live="polite"></p>
+    </div>
+
+    <div id="projects-banner" class="banner" hidden role="status" aria-live="polite"></div>
+
+    <ol class="ledger ledger--projects" id="projects-list" aria-live="polite"></ol>
+
+    <p class="empty-state" id="projects-empty" hidden>No projects match your search.</p>
+    <p class="loading-state" id="projects-loading">Loading taken projects…</p>
+
+    <button type="button" id="projects-load-more" class="btn btn--ghost" hidden>Load more</button>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Ready to register? <a href="index.html">Submit your project</a> &nbsp;·&nbsp; <a href="admin.html">Admin dashboard</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="projects.js"></script>
+</body>
+</html>

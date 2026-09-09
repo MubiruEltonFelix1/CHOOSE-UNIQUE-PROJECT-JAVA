@@ -178,16 +178,14 @@
 
     setSubmitting(true);
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("submissions")
         .insert({
           student_name: values.student_name,
           registration_number: values.registration_number,
           project_title: values.project_title,
           course_unit: COURSE_UNIT,
-        })
-        .select()
-        .single();
+        });
 
       if (error) {
         handleInsertError(error);
@@ -198,10 +196,6 @@
       titleHint.textContent = "";
       regHint.textContent = "";
       showBanner(formBanner, "Project submitted successfully. It now appears in the list below.", "success");
-
-      if (data && !loadedIds.has(data.id)) {
-        prependSubmission(data, true);
-      }
     } catch (err) {
       showBanner(formBanner, "Network error — please check your connection and try again.", "error");
     } finally {
@@ -226,7 +220,8 @@
       return;
     }
 
-    showBanner(formBanner, "Something went wrong while submitting. Please try again in a moment.", "error");
+    // Show the actual error in development so issues are visible
+    showBanner(formBanner, "Error: " + (error.message || "Something went wrong while submitting. Please try again."), "error");
   }
 
   function setSubmitting(isSubmitting) {

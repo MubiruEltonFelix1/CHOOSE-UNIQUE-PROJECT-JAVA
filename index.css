@@ -86,10 +86,20 @@ a:hover { color: var(--accent); }
   padding: 2.75rem 1.25rem 2.25rem;
 }
 
+.band__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+
 .band__title {
   color: #fff;
-  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-size: clamp(1.4rem, 4vw, 2.1rem);
   letter-spacing: 0.01em;
+  margin: 0;
 }
 
 .band__subtitle {
@@ -97,6 +107,35 @@ a:hover { color: var(--accent); }
   max-width: 52ch;
   margin: 0;
   font-size: 1rem;
+}
+
+.band__course {
+  color: #fff;
+  font-style: normal;
+}
+
+/* "Check taken projects" / "Back" pill button in the header */
+.btn-taken {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border-radius: 2rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e8ecf5;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.btn-taken:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
 }
 
 /* Page layout -------------------------------------------------------------- */
@@ -318,13 +357,163 @@ a:hover { color: var(--accent); }
   padding: 1.5rem 1.25rem 2.5rem;
 }
 
-/* Responsive ------------------------------------------------------------------------- */
+/* Projects page toolbar ---------------------------------------------------- */
 
-@media (max-width: 480px) {
-  .card { padding: 1.25rem 1rem 1.5rem; }
-  .band__inner { padding: 2.25rem 1rem 1.75rem; }
+.projects-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.projects-count {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* Search with icon --------------------------------------------------------- */
+
+.search--large {
+  position: relative;
+  flex: 1 1 260px;
+}
+
+.search--large input {
+  width: 100%;
+  padding: 0.65rem 0.85rem 0.65rem 2.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+}
+.search--large input:focus {
+  border-color: var(--focus);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(47, 111, 176, 0.15);
+}
+
+.search__icon {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-soft);
+  pointer-events: none;
+}
+
+/* Taken tag ----------------------------------------------------------------- */
+
+.ledger__tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  line-height: 1.6;
+}
+
+.ledger__tag--taken {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border: 1px solid #e8b4b0;
+}
+
+/* Ledger projects variant — slightly more spacing ------------------------- */
+
+.ledger--projects .ledger__row {
+  padding: 1rem 0.1rem;
+}
+
+/* Responsive ---------------------------------------------------------------- */
+
+/* Tablets and below (≤ 640px) */
+@media (max-width: 640px) {
+  .band__inner {
+    padding: 1.75rem 1rem 1.5rem;
+  }
+
+  .band__top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .band__title {
+    font-size: 1.4rem;
+  }
+
+  .card {
+    padding: 1.1rem 1rem 1.4rem;
+  }
+
+  .page {
+    padding: 1.25rem 1rem 2.5rem;
+  }
+
+  .btn--primary {
+    font-size: 0.97rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .list-section__head {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .projects-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .projects-count {
+    text-align: right;
+  }
+
+  .ledger__meta {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+}
+
+/* Phones (≤ 400px) */
+@media (max-width: 400px) {
+  .band__title {
+    font-size: 1.25rem;
+  }
+
+  .btn-taken {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.85rem;
+  }
+
+  .ledger__row {
+    grid-template-columns: 1.8rem 1fr;
+    gap: 0.1rem 0.5rem;
+  }
+
+  .field input,
+  .search--large input {
+    font-size: 0.97rem;
+  }
+
+  .site-footer {
+    font-size: 0.82rem;
+    padding: 1.25rem 1rem 2rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

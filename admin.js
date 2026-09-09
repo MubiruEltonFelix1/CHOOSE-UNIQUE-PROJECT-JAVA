@@ -260,7 +260,7 @@
       updateTotalCount(typeof count === "number" ? count : rows.length, currentSearch);
       emptyState.hidden = tableBody.children.length > 0;
     } catch (error) {
-      showBanner(dashboardBanner, "Could not load submissions. Check your connection and try again.", "error");
+      showBanner(dashboardBanner, "Could not load submissions: " + (error.message || JSON.stringify(error)), "error");
     } finally {
       isLoading = false;
       loadingState.hidden = true;
@@ -400,37 +400,75 @@
     }
   }
 
-  function exportToCsv() {
-    const rows = Array.from(tableBody.querySelectorAll("tr")).map((row) => {
-      const data = getRowDataFromElement(row);
-      return {
-        "Registration No.": data.registration_number,
-        "Student name": data.student_name,
-        "Project title": data.project_title,
-        "Date submitted": formatDate(data.created_at),
-      };
-    });
+  async function exportToCsv() {
+    showBanner(dashboardBanner, "Preparing export…", "muted");
+    exportBtn.disabled = true;
 
-    if (rows.length === 0) {
-      showBanner(dashboardBanner, "There is nothing to export yet.", "muted");
-      return;
+    try {
+      // Fetch ALL rows for the current course unit directly from Supabase
+      // so the CSV is never limited by what's currently rendered in the table
+      let allRows = [];
+      let from = 0;
+      const batchSize = 1000;
+
+      while (true) {
+        let query = supabase
+          .from("submissions")
+          .select("id, registration_number, student_name, project_title, created_at")
+          .eq("course_unit", COURSE_UNIT)
+          .order("created_at", { ascending: true })
+          .range(from, from + batchSize - 1);
+
+        if (currentSearch) {
+          const searchValue = `%${normalize(currentSearch)}%`;
+          query = query.or(
+            `student_name.ilike.${searchValue},registration_number.ilike.${searchValue},project_title.ilike.${searchValue}`
+          );
+        }
+
+        const { data, error } = await query;
+        if (error) throw error;
+        if (!data || data.length === 0) break;
+        allRows = allRows.concat(data);
+        if (data.length < batchSize) break;
+        from += batchSize;
+      }
+
+      if (allRows.length === 0) {
+        showBanner(dashboardBanner, "There is nothing to export yet.", "muted");
+        return;
+      }
+
+      const headers = ["No.", "Registration No.", "Student name", "Project title", "Date submitted"];
+      const csvLines = [
+        headers.join(","),
+        ...allRows.map((row, i) =>
+          [
+            csvCell(i + 1),
+            csvCell(row.registration_number),
+            csvCell(row.student_name),
+            csvCell(row.project_title),
+            csvCell(formatDate(row.created_at)),
+          ].join(",")
+        ),
+      ];
+
+      const blob = new Blob(["\uFEFF" + csvLines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `course-project-submissions-${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+
+      hideBanner(dashboardBanner);
+    } catch (error) {
+      showBanner(dashboardBanner, "Export failed: " + (error.message || "Unknown error"), "error");
+    } finally {
+      exportBtn.disabled = false;
     }
-
-    const headers = ["Registration No.", "Student name", "Project title", "Date submitted"];
-    const csvLines = [
-      headers.join(","),
-      ...rows.map((row) => headers.map((header) => csvCell(row[header])).join(",")),
-    ];
-
-    const blob = new Blob(["\uFEFF" + csvLines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `course-project-submissions-${new Date().toISOString().slice(0, 10)}.csv`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
   }
 
   function csvCell(value) {
@@ -515,7 +553,7 @@
   logoutBtn.addEventListener("click", handleLogout);
   adminSearch.addEventListener("input", debouncedSearch);
   loadMoreBtn.addEventListener("click", () => loadSubmissions(false));
-  exportBtn.addEventListener("click", exportToCsv);
+  exportBtn.addEventListener("click", () => exportToCsv());
   tableBody.addEventListener("click", handleTableClick);
   editForm.addEventListener("submit", handleEditSubmit);
   confirmDeleteBtn.addEventListener("click", handleDeleteConfirm);
