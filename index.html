@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Course Project Registration</title>
+<meta name="description" content="Register your course project and see what your classmates have already chosen." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <header class="band">
+    <div class="band__inner">
+      <h1 class="band__title">Course Project Registration</h1>
+      <p class="band__subtitle">Check the list below before you submit — every project can only be taken once. Choose something no one else has registered yet.</p>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <section class="card card--accent" aria-labelledby="form-heading">
+      <h2 id="form-heading">Register your project</h2>
+
+      <div id="form-banner" class="banner" hidden role="status" aria-live="polite"></div>
+
+      <form id="submission-form" novalidate>
+        <div class="field">
+          <label for="student_name">Full name</label>
+          <input type="text" id="student_name" name="student_name" autocomplete="name" required maxlength="120" />
+          <p class="field__error" id="error-student_name"></p>
+        </div>
+
+        <div class="field">
+          <label for="registration_number">Registration number</label>
+          <input type="text" id="registration_number" name="registration_number" autocomplete="off" required maxlength="40" />
+          <p class="field__hint" id="hint-registration_number"></p>
+          <p class="field__error" id="error-registration_number"></p>
+        </div>
+
+        <div class="field">
+          <label for="project_title">Project title</label>
+          <input type="text" id="project_title" name="project_title" autocomplete="off" required maxlength="200" />
+          <p class="field__hint" id="hint-project_title"></p>
+          <p class="field__error" id="error-project_title"></p>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn btn--primary">
+          <span class="btn__label">Submit project</span>
+          <span class="btn__spinner" hidden aria-hidden="true"></span>
+        </button>
+      </form>
+    </section>
+
+    <section class="list-section" aria-labelledby="list-heading">
+      <div class="list-section__head">
+        <h2 id="list-heading">Submitted projects</h2>
+        <p class="list-section__count" id="submission-count" aria-live="polite"></p>
+      </div>
+
+      <div class="search">
+        <label for="search-input" class="sr-only">Search project titles</label>
+        <input type="search" id="search-input" placeholder="Search project titles…" />
+      </div>
+
+      <div id="realtime-banner" class="banner banner--muted" hidden role="status" aria-live="polite"></div>
+
+      <ol class="ledger" id="submissions-list" aria-live="polite"></ol>
+
+      <p class="empty-state" id="empty-state" hidden>No projects match your search yet.</p>
+      <p class="loading-state" id="loading-state" hidden>Loading submissions…</p>
+
+      <button type="button" id="load-more-btn" class="btn btn--ghost" hidden>Load more</button>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Are you the class president? <a href="admin.html">Go to admin dashboard</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
